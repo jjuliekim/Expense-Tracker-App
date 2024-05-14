@@ -29,11 +29,17 @@ public class LoginActivity extends AppCompatActivity {
 
     // handle login process
     public void checkLogin(View view) {
-        EditText userInput = view.findViewById(R.id.userInput);
+        EditText userInput = findViewById(R.id.userInput);
         String username = userInput.getText().toString();
-        EditText pwInput = view.findViewById(R.id.pwInput);
+        EditText pwInput = findViewById(R.id.pwInput);
         String password = pwInput.getText().toString();
 
+        // check if entries are empty
+        if (username.isEmpty() || password.isEmpty()) {
+            Toast.makeText(this, "Invalid Inputs", Toast.LENGTH_SHORT).show();
+            userInput.setText("");
+            pwInput.setText("");
+        }
         // check if username already exists
         SharedPreferences sharedPreferences = getSharedPreferences("LoginData", MODE_PRIVATE);
         Intent myIntent = new Intent(LoginActivity.this, DashboardActivity.class); // from, to
@@ -45,6 +51,8 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(myIntent);
             } else {
                 Toast.makeText(view.getContext(), "Invalid Login", Toast.LENGTH_SHORT).show();
+                userInput.setText("");
+                pwInput.setText("");
             }
         } else {
             // if new username, save info to Shared Preferences
