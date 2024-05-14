@@ -1,8 +1,10 @@
 package com.example.kim_j_project2;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,9 +32,23 @@ public class LoginActivity extends AppCompatActivity {
         String username = userInput.getText().toString();
         EditText pwInput = view.findViewById(R.id.pwInput);
         String password = pwInput.getText().toString();
-        // if username exists, check if matches password
-        // if incorrect password -> Toast ("Invalid Log In")
-        // if new username, save info to Shared Preferences -> Toast ("Registered")
-        // direct to dashboard activity
+
+        // check if username already exists
+        SharedPreferences sharedPreferences = getSharedPreferences("LoginData", MODE_PRIVATE);
+        if (sharedPreferences.contains(username)) {
+            // validate password
+            String sharedPrefPw = sharedPreferences.getString(username, null);
+            if (password.equals(sharedPrefPw)) {
+                Toast.makeText(view.getContext(), "Logging In", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(view.getContext(), "Invalid Login", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            // if new username, save info to Shared Preferences
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString(username, password);
+            editor.apply();
+            Toast.makeText(view.getContext(), "Registered", Toast.LENGTH_SHORT).show();
+        }
     }
 }
