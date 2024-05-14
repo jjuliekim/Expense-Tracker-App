@@ -1,5 +1,6 @@
 package com.example.kim_j_project2;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -35,11 +36,13 @@ public class LoginActivity extends AppCompatActivity {
 
         // check if username already exists
         SharedPreferences sharedPreferences = getSharedPreferences("LoginData", MODE_PRIVATE);
+        Intent myIntent = new Intent(LoginActivity.this, DashboardActivity.class); // from, to
         if (sharedPreferences.contains(username)) {
             // validate password
             String sharedPrefPw = sharedPreferences.getString(username, null);
             if (password.equals(sharedPrefPw)) {
                 Toast.makeText(view.getContext(), "Logging In", Toast.LENGTH_LONG).show();
+                startActivity(myIntent);
             } else {
                 Toast.makeText(view.getContext(), "Invalid Login", Toast.LENGTH_SHORT).show();
             }
@@ -49,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
             editor.putString(username, password);
             editor.apply();
             Toast.makeText(view.getContext(), "Registered", Toast.LENGTH_SHORT).show();
+            startActivity(myIntent);
         }
     }
 }
