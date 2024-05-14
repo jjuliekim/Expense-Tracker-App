@@ -1,6 +1,8 @@
 package com.example.kim_j_project2;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,5 +22,22 @@ public class DashboardActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        // retrieve info from login activity
+        Intent myIntent = getIntent();
+        String username = myIntent.getStringExtra("username");
+        String budget = myIntent.getStringExtra("budget");
+        String expense = myIntent.getStringExtra("expense");
+        String balance = myIntent.getStringExtra("balance");
+
+        // set xml texts
+        TextView welcomeText = findViewById(R.id.welcomeText);
+        welcomeText.setText(String.format("Welcome, %s!", username));
+        TextView budgetText = findViewById(R.id.currBudgetText);
+        budgetText.setText(budget);
+        TextView expenseText = findViewById(R.id.totalExpText);
+        expenseText.setText(expense);
+        TextView balanceText = findViewById(R.id.balanceText);
+        balanceText.setText(balance);
     }
 }
