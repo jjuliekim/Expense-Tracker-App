@@ -4,4 +4,10 @@
     <string name="username">Enter Username</string>
     <string name="password">Enter Password</string>
     <string name="signup_reg">Sign Up / Register</string>
+    <string name="welcome_user">Welcome User!</string>
+    <string name="add_expense">Add Expense</string>
+    <string name="expense_list">Expense List</string>
+    <string name="current_budget">Current Budget:</string>
+    <string name="total_expenses">Total Expenses:</string>
+    <string name="remaining_balances">Remaining Balances:</string>
 </resources>
