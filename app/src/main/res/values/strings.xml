@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Kim_J-Project2</string>
+    <string name="sign_up_register">Sign Up/Register</string>
+    <string name="username">Enter Username</string>
+    <string name="password">Enter Password</string>
+    <string name="signup_reg">Sign Up / Register</string>
 </resources>
