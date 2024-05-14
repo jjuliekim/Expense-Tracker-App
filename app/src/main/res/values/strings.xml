@@ -10,4 +10,9 @@
     <string name="current_budget">Current Budget:</string>
     <string name="total_expenses">Total Expenses:</string>
     <string name="remaining_balances">Remaining Balances:</string>
+    <string name="save_expense">Save Expense</string>
+    <string name="name">Name</string>
+    <string name="dollar_sign">$</string>
+    <string name="expense_name">Expense Name</string>
+    <string name="amount">Amount</string>
 </resources>
