@@ -46,20 +46,22 @@ public class LoginActivity extends AppCompatActivity {
         if (sharedPreferences.contains(username)) {
             // validate password
             String sharedPrefPw = sharedPreferences.getString(username, null);
-            if (password.equals(sharedPrefPw)) {
+            if (password.equals(sharedPrefPw)) { // successfully logged in
                 Toast.makeText(view.getContext(), "Logging In", Toast.LENGTH_LONG).show();
+                myIntent.putExtra("username", username);
                 startActivity(myIntent);
-            } else {
+            } else { // incorrect login
                 Toast.makeText(view.getContext(), "Invalid Login", Toast.LENGTH_SHORT).show();
                 userInput.setText("");
                 pwInput.setText("");
             }
         } else {
-            // if new username, save info to Shared Preferences
+            // register user
+            Toast.makeText(view.getContext(), "Registered", Toast.LENGTH_SHORT).show();
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString(username, password);
             editor.apply();
-            Toast.makeText(view.getContext(), "Registered", Toast.LENGTH_SHORT).show();
+            myIntent.putExtra("username", username);
             startActivity(myIntent);
         }
     }
