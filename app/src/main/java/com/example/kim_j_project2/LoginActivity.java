@@ -49,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
             if (password.equals(sharedPrefPw)) { // successfully logged in
                 Toast.makeText(view.getContext(), "Logging In", Toast.LENGTH_LONG).show();
                 myIntent.putExtra("username", username);
+                // pass data using intent put extra
                 String budget = sharedPreferences.getString(username + "_budget", "0");
                 String expense = sharedPreferences.getString(username + "_expense", "0");
                 String balance = sharedPreferences.getString(username + "_balance", "0");
@@ -70,6 +71,7 @@ public class LoginActivity extends AppCompatActivity {
             editor.putString(username + "_expense", "0");
             editor.putString(username + "_balance", "0");
             editor.apply();
+            // pass data using intent put extra
             myIntent.putExtra("username", username);
             myIntent.putExtra("budget", "0");
             myIntent.putExtra("expense", "0");
