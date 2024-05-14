@@ -2,6 +2,7 @@ package com.example.kim_j_project2;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -33,7 +34,7 @@ public class DashboardActivity extends AppCompatActivity {
         // set xml texts
         TextView welcomeText = findViewById(R.id.welcomeText);
         welcomeText.setText(String.format("Welcome, %s!", username));
-        TextView budgetText = findViewById(R.id.currBudgetText);
+        EditText budgetText = findViewById(R.id.budgetText);
         budgetText.setText(budget);
         TextView expenseText = findViewById(R.id.totalExpText);
         expenseText.setText(expense);
