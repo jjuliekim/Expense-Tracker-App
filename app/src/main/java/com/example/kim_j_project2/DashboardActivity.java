@@ -1,6 +1,7 @@
 package com.example.kim_j_project2;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -30,11 +31,13 @@ public class DashboardActivity extends AppCompatActivity {
         // retrieve info from login activity
         Intent myIntent = getIntent();
         String username = myIntent.getStringExtra("username");
-        String budget = myIntent.getStringExtra("budget");
-        String expense = myIntent.getStringExtra("expense");
-        String balance = myIntent.getStringExtra("balance");
 
-        // set xml texts
+        // retrieve stored information
+        SharedPreferences sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
+        String budget = sharedPreferences.getString(username + "_budget", "0");
+        String expense = sharedPreferences.getString(username + "_expense", "0");
+
+        // set dashboard texts
         TextView welcomeText = findViewById(R.id.welcomeText);
         welcomeText.setText(String.format("Welcome, %s!", username));
         if (!Objects.equals(budget, "0")) {
@@ -44,15 +47,27 @@ public class DashboardActivity extends AppCompatActivity {
         TextView expenseText = findViewById(R.id.totalExpText);
         expenseText.setText(expense);
         TextView balanceText = findViewById(R.id.balanceText);
-        balanceText.setText(balance);
+        double balance = Integer.parseInt(budget) - Integer.parseInt(expense);
+        balanceText.setText(String.valueOf(balance));
     }
 
-    // add expense
+    // send to add expense activity
     public void addExpense(View view) {
-        
+        SharedPreferences sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Intent myIntent = getIntent();
+        String username = myIntent.getStringExtra("username");
+
+        EditText budgetText = findViewById(R.id.budgetText);
+        editor.putString(username + "_budget", budgetText.getText().toString());
+        editor.apply();
+
+        Intent nextIntent = new Intent(DashboardActivity.this, AddExpenseActivity.class);
+        nextIntent.putExtra("budget", budgetText.getText().toString());
+        startActivity(nextIntent);
     }
 
-    // display expense list
+    // send to expense list activity
     public void showExpenseList(View view) {
     }
 }

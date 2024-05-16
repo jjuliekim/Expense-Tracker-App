@@ -1,6 +1,7 @@
 package com.example.kim_j_project2;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,5 +21,10 @@ public class AddExpenseActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+    }
+
+    // send back to dashboard and update expense and remaining balance
+    public void saveExpense(View view) {
+
     }
 }

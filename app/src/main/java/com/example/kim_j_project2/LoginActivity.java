@@ -41,21 +41,15 @@ public class LoginActivity extends AppCompatActivity {
             pwInput.setText("");
         }
         // check if username already exists
-        SharedPreferences sharedPreferences = getSharedPreferences("LoginData", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
         Intent myIntent = new Intent(LoginActivity.this, DashboardActivity.class); // from, to
-        if (sharedPreferences.contains(username + "_password")) {
+        if (sharedPreferences.contains(username)) {
             // validate password
             String sharedPrefPw = sharedPreferences.getString(username + "_password", null);
             if (password.equals(sharedPrefPw)) { // successfully logged in
                 Toast.makeText(view.getContext(), "Logging In", Toast.LENGTH_LONG).show();
+                // pass username and load dashboard activity
                 myIntent.putExtra("username", username);
-                // pass data using intent put extra
-                String budget = sharedPreferences.getString(username + "_budget", "0");
-                String expense = sharedPreferences.getString(username + "_expense", "0");
-                String balance = sharedPreferences.getString(username + "_balance", "0");
-                myIntent.putExtra("budget", budget);
-                myIntent.putExtra("expense", expense);
-                myIntent.putExtra("balance", balance);
                 startActivity(myIntent);
             } else { // incorrect login
                 Toast.makeText(view.getContext(), "Invalid Login", Toast.LENGTH_SHORT).show();
@@ -66,16 +60,14 @@ public class LoginActivity extends AppCompatActivity {
             // register user
             Toast.makeText(view.getContext(), "Registered", Toast.LENGTH_SHORT).show();
             SharedPreferences.Editor editor = sharedPreferences.edit();
+            // save data using shared preferences
+            editor.putString(username, username);
             editor.putString(username + "_password", password);
             editor.putString(username + "_budget", "0");
             editor.putString(username + "_expense", "0");
-            editor.putString(username + "_balance", "0");
             editor.apply();
             // pass data using intent put extra
             myIntent.putExtra("username", username);
-            myIntent.putExtra("budget", "0");
-            myIntent.putExtra("expense", "0");
-            myIntent.putExtra("balance", "0");
             startActivity(myIntent);
         }
     }
