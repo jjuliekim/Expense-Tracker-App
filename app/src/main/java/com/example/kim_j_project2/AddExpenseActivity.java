@@ -30,15 +30,21 @@ public class AddExpenseActivity extends AppCompatActivity {
     public void saveExpense(View view) {
         EditText expenseText = findViewById(R.id.name);
         EditText amountText = findViewById(R.id.amount);
-        // save expense to list
-        // update expense
+
+        // update expense and budget
         Intent myIntent = getIntent();
         String username = myIntent.getStringExtra("username");
         SharedPreferences sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
+
         String currExpense = sharedPreferences.getString(username + "_expense", "0");
         double amount = Double.parseDouble(amountText.getText().toString()) + Double.parseDouble(currExpense);
+        String currBudget = sharedPreferences.getString(username + "_budget", "0");
+        double budget = Double.parseDouble(currBudget) - Double.parseDouble(amountText.getText().toString());
         editor.putString(username + "_expense", String.valueOf(amount));
+        editor.putString(username + "_budget", String.valueOf(budget));
+
+        // save expense to list
         editor.apply();
         Intent nextIntent = new Intent(AddExpenseActivity.this, DashboardActivity.class);
         nextIntent.putExtra("username", username);
