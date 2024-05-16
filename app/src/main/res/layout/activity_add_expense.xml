@@ -48,7 +48,7 @@
             tools:ignore="HardcodedText" />
 
         <EditText
-            android:id="@+id/editTextText3"
+            android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:ems="10"
@@ -68,7 +68,7 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/editTextText4"
+            android:id="@+id/amount"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:ems="10"

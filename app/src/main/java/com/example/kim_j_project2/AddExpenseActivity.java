@@ -1,7 +1,10 @@
 package com.example.kim_j_project2;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,6 +28,20 @@ public class AddExpenseActivity extends AppCompatActivity {
 
     // send back to dashboard and update expense and remaining balance
     public void saveExpense(View view) {
-
+        EditText expenseText = findViewById(R.id.name);
+        EditText amountText = findViewById(R.id.amount);
+        // save expense to list
+        // update expense
+        Intent myIntent = getIntent();
+        String username = myIntent.getStringExtra("username");
+        SharedPreferences sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        String currExpense = sharedPreferences.getString(username + "_expense", "0");
+        double amount = Double.parseDouble(amountText.getText().toString()) + Double.parseDouble(currExpense);
+        editor.putString(username + "_expense", String.valueOf(amount));
+        editor.apply();
+        Intent nextIntent = new Intent(AddExpenseActivity.this, DashboardActivity.class);
+        nextIntent.putExtra("username", username);
+        startActivity(nextIntent);
     }
 }

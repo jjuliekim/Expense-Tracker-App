@@ -58,16 +58,25 @@ public class DashboardActivity extends AppCompatActivity {
         Intent myIntent = getIntent();
         String username = myIntent.getStringExtra("username");
 
+        // save budget and expense
         EditText budgetText = findViewById(R.id.budgetText);
         editor.putString(username + "_budget", budgetText.getText().toString());
+        TextView expenseText = findViewById(R.id.totalExpText);
+        editor.putString(username + "_expense", expenseText.getText().toString());
         editor.apply();
 
+        // go to add expense activity
         Intent nextIntent = new Intent(DashboardActivity.this, AddExpenseActivity.class);
-        nextIntent.putExtra("budget", budgetText.getText().toString());
         startActivity(nextIntent);
     }
 
     // send to expense list activity
     public void showExpenseList(View view) {
+        // go to expense list activity
+        Intent nextIntent = new Intent(DashboardActivity.this, ExpenseListActivity.class);
+        Intent myIntent = getIntent();
+        String username = myIntent.getStringExtra("username");
+        nextIntent.putExtra("username", username);
+        startActivity(nextIntent);
     }
 }
