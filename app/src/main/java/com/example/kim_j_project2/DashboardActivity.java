@@ -2,6 +2,7 @@ package com.example.kim_j_project2;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -44,5 +45,14 @@ public class DashboardActivity extends AppCompatActivity {
         expenseText.setText(expense);
         TextView balanceText = findViewById(R.id.balanceText);
         balanceText.setText(balance);
+    }
+
+    // add expense
+    public void addExpense(View view) {
+        
+    }
+
+    // display expense list
+    public void showExpenseList(View view) {
     }
 }

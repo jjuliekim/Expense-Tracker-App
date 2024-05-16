@@ -38,7 +38,7 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="58dp"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -120,14 +120,15 @@
         android:id="@+id/addButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="29dp"
+        android:layout_marginBottom="239dp"
         android:backgroundTint="#E9EEF2"
         android:text="@string/add_expense"
         android:textColor="#49454F"
-
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/listButton"
+        android:onClick="addExpense"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tableLayout" />
 
@@ -141,6 +142,7 @@
         android:text="@string/expense_list"
         android:textColor="#49454F"
         android:textStyle="bold"
+        android:onClick="showExpenseList"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/addButton"
         app:layout_constraintTop_toBottomOf="@+id/addButton" />
