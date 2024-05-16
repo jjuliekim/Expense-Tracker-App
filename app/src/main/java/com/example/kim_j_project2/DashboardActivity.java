@@ -11,6 +11,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.Objects;
+
 public class DashboardActivity extends AppCompatActivity {
 
     @Override
@@ -34,8 +36,10 @@ public class DashboardActivity extends AppCompatActivity {
         // set xml texts
         TextView welcomeText = findViewById(R.id.welcomeText);
         welcomeText.setText(String.format("Welcome, %s!", username));
-        EditText budgetText = findViewById(R.id.budgetText);
-        budgetText.setText(budget);
+        if (!Objects.equals(budget, "0")) {
+            EditText budgetText = findViewById(R.id.budgetText);
+            budgetText.setText(budget);
+        }
         TextView expenseText = findViewById(R.id.totalExpText);
         expenseText.setText(expense);
         TextView balanceText = findViewById(R.id.balanceText);
