@@ -45,6 +45,8 @@ public class AddExpenseActivity extends AppCompatActivity {
         editor.putString(username + "_budget", String.valueOf(budget));
 
         // save expense to list
+
+        // go back to dashboard
         editor.apply();
         Intent nextIntent = new Intent(AddExpenseActivity.this, DashboardActivity.class);
         nextIntent.putExtra("username", username);
