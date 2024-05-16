@@ -72,10 +72,16 @@ public class DashboardActivity extends AppCompatActivity {
 
     // send to expense list activity
     public void showExpenseList(View view) {
-        // go to expense list activity
-        Intent nextIntent = new Intent(DashboardActivity.this, ExpenseListActivity.class);
+        // save budget
+        SharedPreferences sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
         Intent myIntent = getIntent();
         String username = myIntent.getStringExtra("username");
+        EditText budgetText = findViewById(R.id.budgetText);
+        editor.putString(username + "_budget", budgetText.getText().toString());
+        editor.apply();
+        // go to expense list activity
+        Intent nextIntent = new Intent(DashboardActivity.this, ExpenseListActivity.class);
         nextIntent.putExtra("username", username);
         startActivity(nextIntent);
     }
