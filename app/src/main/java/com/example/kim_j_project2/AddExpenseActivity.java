@@ -39,8 +39,12 @@ public class AddExpenseActivity extends AppCompatActivity {
 
         String currExpense = sharedPreferences.getString(username + "_expense", "0");
         double amount = Double.parseDouble(amountText.getText().toString()) + Double.parseDouble(currExpense);
+        System.out.println("currExpense: " + currExpense);
+        System.out.println("amount: " + amount);
         String currBudget = sharedPreferences.getString(username + "_budget", "0");
         double budget = Double.parseDouble(currBudget) - Double.parseDouble(amountText.getText().toString());
+        System.out.println("currBudget: " + currBudget);
+        System.out.println("budget: " + budget);
         editor.putString(username + "_expense", String.valueOf(amount));
         editor.putString(username + "_budget", String.valueOf(budget));
 
