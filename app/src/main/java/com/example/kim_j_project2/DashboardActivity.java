@@ -21,6 +21,8 @@ import java.util.Objects;
 
 public class DashboardActivity extends AppCompatActivity {
 
+    List<Expense> expenseList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +33,7 @@ public class DashboardActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        List<Expense> expenseList;
+
         Intent myIntent = getIntent();
         String username = myIntent.getStringExtra("username");
 
