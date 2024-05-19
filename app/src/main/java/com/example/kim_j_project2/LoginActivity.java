@@ -51,7 +51,6 @@ public class LoginActivity extends AppCompatActivity {
             if (password.equals(sharedPrefPw)) { // successfully logged in
                 Toast.makeText(view.getContext(), "Logging In", Toast.LENGTH_LONG).show();
                 // pass username and load dashboard activity
-                myIntent.putExtra("username", username);
                 startActivity(myIntent);
             } else { // incorrect login
                 Toast.makeText(view.getContext(), "Invalid Login", Toast.LENGTH_SHORT).show();

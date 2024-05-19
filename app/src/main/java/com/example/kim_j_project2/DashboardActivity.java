@@ -20,8 +20,6 @@ import java.util.Objects;
 
 public class DashboardActivity extends AppCompatActivity {
 
-    List<Expense> expenseList;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,16 +30,6 @@ public class DashboardActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
-        // load expense list details
-        Intent myIntent = getIntent();
-        String username = myIntent.getStringExtra("username");
-        SharedPreferences sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
-        if (sharedPreferences.contains(username + "_expenseList")) {
-            expenseList = Expense.loadExpenses(this, username);
-        } else {
-            expenseList = new ArrayList<>();
-        }
 
         // set dashboard objects
         updateDashboard();
@@ -93,13 +81,19 @@ public class DashboardActivity extends AppCompatActivity {
         // retrieve stored information
         Intent myIntent = getIntent();
         String username = myIntent.getStringExtra("username");
-        Log.i("Debug", "received username: " + username);
         SharedPreferences sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
         String budget = sharedPreferences.getString(username + "_budget", "0.0");
         String expense = sharedPreferences.getString(username + "_expense", "0.0");
 
         Log.i("LoadDashboardDebug", "budget: " + budget + " expense: " + expense);
 
+        // load expense list details
+        ArrayList<Expense> expenseList;
+        if (sharedPreferences.contains(username + "_expenseList")) {
+            expenseList = Expense.loadExpenses(this, username);
+        } else {
+            expenseList = new ArrayList<>();
+        }
         Log.i("Debug", "number of expense items: " + expenseList.size());
 
 

@@ -44,12 +44,13 @@ public class AddExpenseActivity extends AppCompatActivity {
         // update expense and balance
         String currExpense = sharedPreferences.getString(username + "_expense", "0.0");
         double totalExpense = myExpense.getExpenseAmt() + Double.parseDouble(currExpense);
-        String currBudget = sharedPreferences.getString(username + "_budget", "0.0");
-        double balance = Double.parseDouble(currBudget) - myExpense.getExpenseAmt();
+        String setBudget = sharedPreferences.getString(username + "_budget", "0.0");
+        double balance = Double.parseDouble(setBudget) - myExpense.getExpenseAmt();
         editor.putString(username + "_expense", String.valueOf(totalExpense));
         editor.putString(username + "_balance", String.valueOf(balance));
+        editor.apply();
 
-        Log.d("DEBUG", "currExpense: " + currExpense + " newExpense: " + totalExpense + " currBudget: " + currBudget + " balance: " + balance);
+        Log.d("DEBUG", "currExpense: " + currExpense + " newExpense: " + totalExpense + " setBudget: " + setBudget + " balance: " + balance);
 
         // save expense to list
         ArrayList<Expense> expenseList = Expense.loadExpenses(this, username);
@@ -57,7 +58,6 @@ public class AddExpenseActivity extends AppCompatActivity {
         Expense.saveExpenses(this, expenseList, username);
 
         // go back to dashboard
-        editor.apply();
         Intent nextIntent = new Intent(AddExpenseActivity.this, DashboardActivity.class);
         nextIntent.putExtra("username", username);
         startActivity(nextIntent);
