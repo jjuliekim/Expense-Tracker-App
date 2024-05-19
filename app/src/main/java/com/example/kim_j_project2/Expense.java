@@ -8,8 +8,8 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 
 public class Expense {
-    private final String expenseName;
-    private final double expenseAmt;
+    private String expenseName;
+    private double expenseAmt;
 
     // constructor
     public Expense(String expenseName, double expenseAmt) {
@@ -17,13 +17,21 @@ public class Expense {
         this.expenseAmt = expenseAmt;
     }
 
-    // getters
+    // getters and setters
     public String getExpenseName() {
         return expenseName;
     }
 
     public double getExpenseAmt() {
         return expenseAmt;
+    }
+
+    public void setExpenseName(String name) {
+        expenseName = name;
+    }
+
+    public void setExpenseAmt(double amount) {
+        expenseAmt = amount;
     }
 
     // json load/save

@@ -2,8 +2,6 @@ package com.example.kim_j_project2;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,9 +32,7 @@ public class ExpenseListActivity extends AppCompatActivity {
         Intent myIntent = getIntent();
         String username = myIntent.getStringExtra("username");
         ArrayList<Expense> expenseList = Expense.loadExpenses(this, username);
-        ArrayAdapter<Expense> myAdapter = new ExpenseAdapter(this, expenseList);
-        ListView listView = findViewById(R.id.expensesListView);
-        listView.setAdapter(myAdapter);
+
 
     }
 }
