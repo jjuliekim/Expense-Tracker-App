@@ -65,8 +65,8 @@ public class LoginActivity extends AppCompatActivity {
             // save data using shared preferences
             editor.putString(username, username);
             editor.putString(username + "_password", password);
-            editor.putString(username + "_budget", "0");
-            editor.putString(username + "_expense", "0");
+            editor.putString(username + "_budget", "0.0");
+            editor.putString(username + "_expense", "0.0");
             editor.apply();
             // pass data using intent put extra
             myIntent.putExtra("username", username);

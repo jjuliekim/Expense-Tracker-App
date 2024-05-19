@@ -35,12 +35,12 @@ public class DashboardActivity extends AppCompatActivity {
         });
 
         // load expense list details
-        SharedPreferences sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
+        /*SharedPreferences sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
         if (sharedPreferences.contains(username + "_expenseList")) {
 
         } else {
             expenseList = new ArrayList<>();
-        }
+        }*/
 
         // and on finish/exit, save expense list details
 
@@ -88,20 +88,20 @@ public class DashboardActivity extends AppCompatActivity {
     private void updateDashboard() {
         // retrieve stored information
         SharedPreferences sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
-        String budget = sharedPreferences.getString(username + "_budget", "0");
-        String expense = sharedPreferences.getString(username + "_expense", "0");
+        String budget = sharedPreferences.getString(username + "_budget", "0.0");
+        String expense = sharedPreferences.getString(username + "_expense", "0.0");
 
         // set dashboard texts
         TextView welcomeText = findViewById(R.id.welcomeText);
         welcomeText.setText(String.format("Welcome, %s!", username));
-        if (!Objects.equals(budget, "0")) {
+        if (!Objects.equals(budget, "0.0")) {
             EditText budgetText = findViewById(R.id.budgetText);
             budgetText.setText(budget);
         }
         TextView expenseText = findViewById(R.id.totalExpText);
         expenseText.setText(expense);
         TextView balanceText = findViewById(R.id.balanceText);
-        double balance = Integer.parseInt(budget) - Integer.parseInt(expense);
+        double balance = Double.parseDouble(budget) - Double.parseDouble(expense);
         balanceText.setText(String.valueOf(balance));
     }
 }
