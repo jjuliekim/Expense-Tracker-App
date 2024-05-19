@@ -100,6 +100,9 @@ public class DashboardActivity extends AppCompatActivity {
 
         Log.i("LoadDashboardDebug", "budget: " + budget + " expense: " + expense);
 
+        Log.i("Debug", "number of expense items: " + Expense.loadExpenses(this, username).size());
+
+
         // set dashboard texts
         TextView welcomeText = findViewById(R.id.welcomeText);
         welcomeText.setText(String.format("Welcome, %s!", username));

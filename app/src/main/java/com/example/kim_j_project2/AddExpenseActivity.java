@@ -46,9 +46,10 @@ public class AddExpenseActivity extends AppCompatActivity {
         double totalExpense = myExpense.getExpenseAmt() + Double.parseDouble(currExpense);
         String currBudget = sharedPreferences.getString(username + "_budget", "0.0");
         double balance = Double.parseDouble(currBudget) - myExpense.getExpenseAmt();
-        Log.d("DEBUG", "currExpense: " + currExpense + " newExpense: " + totalExpense + " currBudget: " + currBudget + " balance: " + balance);
         editor.putString(username + "_expense", String.valueOf(totalExpense));
         editor.putString(username + "_balance", String.valueOf(balance));
+
+        Log.d("DEBUG", "currExpense: " + currExpense + " newExpense: " + totalExpense + " currBudget: " + currBudget + " balance: " + balance);
 
         // save expense to list
         ArrayList<Expense> expenseList = Expense.loadExpenses(this, username);
