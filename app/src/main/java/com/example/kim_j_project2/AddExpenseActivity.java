@@ -13,6 +13,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.ArrayList;
+
 public class AddExpenseActivity extends AppCompatActivity {
 
     @Override
@@ -49,6 +51,9 @@ public class AddExpenseActivity extends AppCompatActivity {
         editor.putString(username + "_balance", String.valueOf(balance));
 
         // save expense to list
+        ArrayList<Expense> expenseList = Expense.loadExpenses(this, username);
+        expenseList.add(myExpense);
+        Expense.saveExpenses(this, expenseList, username);
 
         // go back to dashboard
         editor.apply();

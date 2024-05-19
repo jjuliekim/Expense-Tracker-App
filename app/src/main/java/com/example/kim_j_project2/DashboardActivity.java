@@ -14,6 +14,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -33,14 +34,14 @@ public class DashboardActivity extends AppCompatActivity {
         });
 
         // load expense list details
-        /*SharedPreferences sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
+        Intent myIntent = getIntent();
+        String username = myIntent.getStringExtra("username");
+        SharedPreferences sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
         if (sharedPreferences.contains(username + "_expenseList")) {
-
+            expenseList = Expense.loadExpenses(this, username);
         } else {
             expenseList = new ArrayList<>();
-        }*/
-
-        // and on finish/exit, save expense list details
+        }
 
         // set dashboard objects
         updateDashboard();
