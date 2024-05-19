@@ -3,6 +3,7 @@ package com.example.kim_j_project2;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -28,7 +29,12 @@ public class DashboardActivity extends AppCompatActivity {
             return insets;
         });
 
+        Intent myIntent = getIntent();
+        String username = myIntent.getStringExtra("username");
+        Log.d("DashboardActivity", "Username received: " + username);
+
         // load expense list details
+        SharedPreferences sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
         // and on finish/exit, save expense list details
 
         // set dashboard objects

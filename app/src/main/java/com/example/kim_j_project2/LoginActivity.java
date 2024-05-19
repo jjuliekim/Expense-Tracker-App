@@ -3,6 +3,7 @@ package com.example.kim_j_project2;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -39,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "Invalid Inputs", Toast.LENGTH_SHORT).show();
             userInput.setText("");
             pwInput.setText("");
+            return;
         }
         // check if username already exists
         SharedPreferences sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
@@ -50,6 +52,8 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(view.getContext(), "Logging In", Toast.LENGTH_LONG).show();
                 // pass username and load dashboard activity
                 myIntent.putExtra("username", username);
+                Log.d("LoginActivity", "Username: " + username);
+                Log.d("LoginActivity", "Password: " + password);
                 startActivity(myIntent);
             } else { // incorrect login
                 Toast.makeText(view.getContext(), "Invalid Login", Toast.LENGTH_SHORT).show();
