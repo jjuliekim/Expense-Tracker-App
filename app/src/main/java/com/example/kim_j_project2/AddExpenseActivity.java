@@ -3,6 +3,7 @@ package com.example.kim_j_project2;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -28,24 +29,23 @@ public class AddExpenseActivity extends AppCompatActivity {
 
     // send back to dashboard and update expense and remaining balance
     public void saveExpense(View view) {
+        // get input
         EditText expenseText = findViewById(R.id.name);
         EditText amountText = findViewById(R.id.amount);
+        Expense myExpense = new Expense(expenseText.getText().toString(), Double.parseDouble(amountText.getText().toString()));
 
-        // update expense and budget
         Intent myIntent = getIntent();
         String username = myIntent.getStringExtra("username");
         SharedPreferences sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
+        // update expense and budget
         String currExpense = sharedPreferences.getString(username + "_expense", "0");
-        double amount = Double.parseDouble(amountText.getText().toString()) + Double.parseDouble(currExpense);
-        System.out.println("currExpense: " + currExpense);
-        System.out.println("amount: " + amount);
+        double totalExpense = myExpense.getExpenseAmt() + Double.parseDouble(currExpense);
         String currBudget = sharedPreferences.getString(username + "_budget", "0");
-        double budget = Double.parseDouble(currBudget) - Double.parseDouble(amountText.getText().toString());
-        System.out.println("currBudget: " + currBudget);
-        System.out.println("budget: " + budget);
-        editor.putString(username + "_expense", String.valueOf(amount));
+        double budget = Double.parseDouble(currBudget) - myExpense.getExpenseAmt();
+        Log.d("DEBUG", "currExpense: " + currExpense + " newExpense: " + totalExpense + " currBudget: " + currBudget + " budget: " + budget);
+        editor.putString(username + "_expense", String.valueOf(totalExpense));
         editor.putString(username + "_budget", String.valueOf(budget));
 
         // save expense to list
