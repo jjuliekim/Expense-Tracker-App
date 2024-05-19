@@ -28,27 +28,17 @@ public class DashboardActivity extends AppCompatActivity {
             return insets;
         });
 
-        // retrieve info from login activity
-        Intent myIntent = getIntent();
-        String username = myIntent.getStringExtra("username");
+        // load expense list details
+        // and on finish/exit, save expense list details
 
-        // retrieve stored information
-        SharedPreferences sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
-        String budget = sharedPreferences.getString(username + "_budget", "0");
-        String expense = sharedPreferences.getString(username + "_expense", "0");
+        // set dashboard objects
+        updateDashboard();
+    }
 
-        // set dashboard texts
-        TextView welcomeText = findViewById(R.id.welcomeText);
-        welcomeText.setText(String.format("Welcome, %s!", username));
-        if (!Objects.equals(budget, "0")) {
-            EditText budgetText = findViewById(R.id.budgetText);
-            budgetText.setText(budget);
-        }
-        TextView expenseText = findViewById(R.id.totalExpText);
-        expenseText.setText(expense);
-        TextView balanceText = findViewById(R.id.balanceText);
-        double balance = Integer.parseInt(budget) - Integer.parseInt(expense);
-        balanceText.setText(String.valueOf(balance));
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateDashboard();
     }
 
     // send to add expense activity
@@ -84,5 +74,29 @@ public class DashboardActivity extends AppCompatActivity {
         Intent nextIntent = new Intent(DashboardActivity.this, ExpenseListActivity.class);
         nextIntent.putExtra("username", username);
         startActivity(nextIntent);
+    }
+
+    private void updateDashboard() {
+        // retrieve info from login activity
+        Intent myIntent = getIntent();
+        String username = myIntent.getStringExtra("username");
+
+        // retrieve stored information
+        SharedPreferences sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
+        String budget = sharedPreferences.getString(username + "_budget", "0");
+        String expense = sharedPreferences.getString(username + "_expense", "0");
+
+        // set dashboard texts
+        TextView welcomeText = findViewById(R.id.welcomeText);
+        welcomeText.setText(String.format("Welcome, %s!", username));
+        if (!Objects.equals(budget, "0")) {
+            EditText budgetText = findViewById(R.id.budgetText);
+            budgetText.setText(budget);
+        }
+        TextView expenseText = findViewById(R.id.totalExpText);
+        expenseText.setText(expense);
+        TextView balanceText = findViewById(R.id.balanceText);
+        double balance = Integer.parseInt(budget) - Integer.parseInt(expense);
+        balanceText.setText(String.valueOf(balance));
     }
 }
