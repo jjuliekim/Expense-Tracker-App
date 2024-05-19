@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         // check if username already exists
         SharedPreferences sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
-        Intent myIntent = new Intent(LoginActivity.this, DashboardActivity.class); // from, to
+        Intent myIntent = new Intent(LoginActivity.this, DashboardActivity.class);
         if (sharedPreferences.contains(username)) {
             // validate password
             String sharedPrefPw = sharedPreferences.getString(username + "_password", null);
@@ -52,8 +52,6 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(view.getContext(), "Logging In", Toast.LENGTH_LONG).show();
                 // pass username and load dashboard activity
                 myIntent.putExtra("username", username);
-                Log.d("LoginActivity", "Username: " + username);
-                Log.d("LoginActivity", "Password: " + password);
                 startActivity(myIntent);
             } else { // incorrect login
                 Toast.makeText(view.getContext(), "Invalid Login", Toast.LENGTH_SHORT).show();
