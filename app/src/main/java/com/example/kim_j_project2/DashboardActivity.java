@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,9 +20,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class DashboardActivity extends AppCompatActivity {
-    List<Expense> expenseList;
-    Intent myIntent = getIntent();
-    String username = myIntent.getStringExtra("username");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +31,9 @@ public class DashboardActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        List<Expense> expenseList;
+        Intent myIntent = getIntent();
+        String username = myIntent.getStringExtra("username");
 
         // load expense list details
         /*SharedPreferences sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
@@ -58,6 +59,8 @@ public class DashboardActivity extends AppCompatActivity {
     public void addExpense(View view) {
         SharedPreferences sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
+        Intent myIntent = getIntent();
+        String username = myIntent.getStringExtra("username");
 
         // save budget and expense
         EditText budgetText = findViewById(R.id.budgetText);
@@ -76,6 +79,8 @@ public class DashboardActivity extends AppCompatActivity {
         // save budget
         SharedPreferences sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
+        Intent myIntent = getIntent();
+        String username = myIntent.getStringExtra("username");
         EditText budgetText = findViewById(R.id.budgetText);
         editor.putString(username + "_budget", budgetText.getText().toString());
         editor.apply();
@@ -87,9 +92,13 @@ public class DashboardActivity extends AppCompatActivity {
 
     private void updateDashboard() {
         // retrieve stored information
+        Intent myIntent = getIntent();
+        String username = myIntent.getStringExtra("username");
         SharedPreferences sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
         String budget = sharedPreferences.getString(username + "_budget", "0.0");
         String expense = sharedPreferences.getString(username + "_expense", "0.0");
+
+        Log.i("DEBUGGING", "budget: " + budget + "expense: " + expense);
 
         // set dashboard texts
         TextView welcomeText = findViewById(R.id.welcomeText);
