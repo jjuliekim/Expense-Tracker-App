@@ -40,9 +40,9 @@ public class AddExpenseActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         // update expense and budget
-        String currExpense = sharedPreferences.getString(username + "_expense", "0");
+        String currExpense = sharedPreferences.getString(username + "_expense", "0.0");
         double totalExpense = myExpense.getExpenseAmt() + Double.parseDouble(currExpense);
-        String currBudget = sharedPreferences.getString(username + "_budget", "0");
+        String currBudget = sharedPreferences.getString(username + "_budget", "0.0");
         double budget = Double.parseDouble(currBudget) - myExpense.getExpenseAmt();
         Log.d("DEBUG", "currExpense: " + currExpense + " newExpense: " + totalExpense + " currBudget: " + currBudget + " budget: " + budget);
         editor.putString(username + "_expense", String.valueOf(totalExpense));

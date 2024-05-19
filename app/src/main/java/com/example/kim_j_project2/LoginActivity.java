@@ -70,6 +70,7 @@ public class LoginActivity extends AppCompatActivity {
             editor.apply();
             // pass data using intent put extra
             myIntent.putExtra("username", username);
+            Log.i("Debug", "sent username: " + username);
             startActivity(myIntent);
         }
     }

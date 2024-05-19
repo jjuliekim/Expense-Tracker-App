@@ -32,9 +32,6 @@ public class DashboardActivity extends AppCompatActivity {
             return insets;
         });
 
-        Intent myIntent = getIntent();
-        String username = myIntent.getStringExtra("username");
-
         // load expense list details
         /*SharedPreferences sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
         if (sharedPreferences.contains(username + "_expenseList")) {
@@ -71,6 +68,7 @@ public class DashboardActivity extends AppCompatActivity {
 
         // go to add expense activity
         Intent nextIntent = new Intent(DashboardActivity.this, AddExpenseActivity.class);
+        nextIntent.putExtra("username", username);
         startActivity(nextIntent);
     }
 
@@ -94,6 +92,7 @@ public class DashboardActivity extends AppCompatActivity {
         // retrieve stored information
         Intent myIntent = getIntent();
         String username = myIntent.getStringExtra("username");
+        Log.i("Debug", "received username: " + username);
         SharedPreferences sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
         String budget = sharedPreferences.getString(username + "_budget", "0.0");
         String expense = sharedPreferences.getString(username + "_expense", "0.0");
