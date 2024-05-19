@@ -33,22 +33,4 @@ public class Expense {
     public void setExpenseAmt(double amount) {
         expenseAmt = amount;
     }
-
-    // json load/save
-    public static void saveExpenses(Context context, ArrayList<Expense> expense, String username) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        Gson gson = new Gson();
-        String jsonList = gson.toJson(expense);
-        editor.putString(username + "_expenseList", jsonList);
-        editor.apply();
-    }
-
-    public static ArrayList<Expense> loadExpenses(Context context, String username) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json = sharedPreferences.getString(username + "_expenseList", null);
-        Type type = new TypeToken<ArrayList<Expense>>() {}.getType();
-        return gson.fromJson(json, type);
-    }
 }

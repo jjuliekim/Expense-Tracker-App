@@ -50,7 +50,6 @@ public class LoginActivity extends AppCompatActivity {
             String sharedPrefPw = sharedPreferences.getString(username + "_password", null);
             if (password.equals(sharedPrefPw)) { // successfully logged in
                 Toast.makeText(view.getContext(), "Logging In", Toast.LENGTH_LONG).show();
-                // pass username and load dashboard activity
                 startActivity(myIntent);
             } else { // incorrect login
                 Toast.makeText(view.getContext(), "Invalid Login", Toast.LENGTH_SHORT).show();
@@ -65,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
             editor.putString(username, username);
             editor.putString(username + "_password", password);
             editor.putString(username + "_budget", "0.0");
-            editor.putString(username + "_expense", "0.0");
+//            editor.putString(username + "_expense", "0.0");
             editor.apply();
             // pass data using intent put extra
             myIntent.putExtra("username", username);

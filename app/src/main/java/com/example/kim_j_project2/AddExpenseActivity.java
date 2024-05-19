@@ -51,17 +51,24 @@ public class AddExpenseActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-
         // update expense and balance
-        String currExpense = sharedPreferences.getString(username + "_expense", "0.0");
-        double totalExpense = myExpense.getExpenseAmt() + Double.parseDouble(currExpense);
+//        String currExpense = sharedPreferences.getString(username + "_expense", "0.0");
+        double expenseSum = 0.0;
+        ArrayList<Expense> expenseList = JsonManager.loadExpenses(this, username);
+        for (Expense item : expenseList) {
+            expenseSum += item.getExpenseAmt();
+        }
+        double totalExpense = myExpense.getExpenseAmt() + expenseSum;
         String setBudget = sharedPreferences.getString(username + "_budget", "0.0");
         double balance = Double.parseDouble(setBudget) - myExpense.getExpenseAmt();
-        editor.putString(username + "_expense", String.valueOf(totalExpense));
+//        editor.putString(username + "_expense", String.valueOf(totalExpense));
         editor.putString(username + "_balance", String.valueOf(balance));
         editor.apply();
 
-        Log.d("DEBUG", "currExpense: " + currExpense + " newExpense: " + totalExpense + " setBudget: " + setBudget + " balance: " + balance);
+        expenseList.add(myExpense);
+        JsonManager.saveExpenses(this, expenseList, username);
+
+        Log.d("DEBUG", "currExpense: " + expenseSum + " newExpense: " + totalExpense + " setBudget: " + setBudget + " balance: " + balance);
 
         // go back to dashboard
         Intent nextIntent = new Intent(AddExpenseActivity.this, DashboardActivity.class);

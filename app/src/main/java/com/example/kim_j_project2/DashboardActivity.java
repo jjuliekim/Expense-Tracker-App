@@ -41,6 +41,45 @@ public class DashboardActivity extends AppCompatActivity {
         updateDashboard();
     }
 
+    private void updateDashboard() {
+        // retrieve stored information
+        Intent myIntent = getIntent();
+        String username = myIntent.getStringExtra("username");
+        Log.i("Debug", "received username: " + username);
+        SharedPreferences sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
+        String budget = sharedPreferences.getString(username + "_budget", "0.0");
+//        String expense = sharedPreferences.getString(username + "_expense", "0.0");
+
+        // load expense list details
+        double expenseSum = 0.0;
+        ArrayList<Expense> expenseList;
+        if (sharedPreferences.contains(username + "_expenseList")) {
+            expenseList = JsonManager.loadExpenses(this, username);
+            for (Expense item : expenseList) {
+                expenseSum += item.getExpenseAmt();
+            }
+        } else {
+            expenseList = new ArrayList<>();
+            expenseSum = 0.0;
+        }
+        String expense = String.valueOf(expenseSum);
+        Log.i("Debug", "number of expense items: " + expenseList.size());
+        Log.i("LoadDashboardDebug", "budget: " + budget + " expense: " + expense);
+
+        // set dashboard texts
+        TextView welcomeText = findViewById(R.id.welcomeText);
+        welcomeText.setText(String.format("Welcome, %s!", username));
+        if (!Objects.equals(budget, "0.0")) {
+            EditText budgetText = findViewById(R.id.budgetText);
+            budgetText.setText(budget);
+        }
+        TextView expenseText = findViewById(R.id.totalExpText);
+        expenseText.setText(expense);
+        TextView balanceText = findViewById(R.id.balanceText);
+        double balance = Double.parseDouble(budget) - Double.parseDouble(expense);
+        balanceText.setText(String.valueOf(balance));
+    }
+
     // send to add expense activity
     public void addExpense(View view) {
         SharedPreferences sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
@@ -51,8 +90,8 @@ public class DashboardActivity extends AppCompatActivity {
         // save budget and expense
         EditText budgetText = findViewById(R.id.budgetText);
         editor.putString(username + "_budget", budgetText.getText().toString());
-        TextView expenseText = findViewById(R.id.totalExpText);
-        editor.putString(username + "_expense", expenseText.getText().toString());
+//        TextView expenseText = findViewById(R.id.totalExpText);
+//        editor.putString(username + "_expense", expenseText.getText().toString());
         editor.apply();
 
         // go to add expense activity
@@ -75,39 +114,5 @@ public class DashboardActivity extends AppCompatActivity {
         Intent nextIntent = new Intent(DashboardActivity.this, ExpenseListActivity.class);
         nextIntent.putExtra("username", username);
         startActivity(nextIntent);
-    }
-
-    private void updateDashboard() {
-        // retrieve stored information
-        Intent myIntent = getIntent();
-        String username = myIntent.getStringExtra("username");
-        SharedPreferences sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
-        String budget = sharedPreferences.getString(username + "_budget", "0.0");
-        String expense = sharedPreferences.getString(username + "_expense", "0.0");
-
-        Log.i("LoadDashboardDebug", "budget: " + budget + " expense: " + expense);
-
-        // load expense list details
-        ArrayList<Expense> expenseList;
-        if (sharedPreferences.contains(username + "_expenseList")) {
-            expenseList = Expense.loadExpenses(this, username);
-        } else {
-            expenseList = new ArrayList<>();
-        }
-        Log.i("Debug", "number of expense items: " + expenseList.size());
-
-
-        // set dashboard texts
-        TextView welcomeText = findViewById(R.id.welcomeText);
-        welcomeText.setText(String.format("Welcome, %s!", username));
-        if (!Objects.equals(budget, "0.0")) {
-            EditText budgetText = findViewById(R.id.budgetText);
-            budgetText.setText(budget);
-        }
-        TextView expenseText = findViewById(R.id.totalExpText);
-        expenseText.setText(expense);
-        TextView balanceText = findViewById(R.id.balanceText);
-        double balance = Double.parseDouble(budget) - Double.parseDouble(expense);
-        balanceText.setText(String.valueOf(balance));
     }
 }
