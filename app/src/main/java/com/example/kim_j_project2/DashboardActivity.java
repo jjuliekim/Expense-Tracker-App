@@ -87,7 +87,7 @@ public class DashboardActivity extends AppCompatActivity {
 
         // save budget input
         EditText budgetText = findViewById(R.id.budgetText);
-        editor.putString(username + "_budget", budgetText.getText().toString());=
+        editor.putString(username + "_budget", budgetText.getText().toString());
         editor.apply();
 
         // go to add expense activity
