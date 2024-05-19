@@ -24,15 +24,4 @@ public class ExpenseListActivity extends AppCompatActivity {
             return insets;
         });
     }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        Intent myIntent = getIntent();
-        String username = myIntent.getStringExtra("username");
-        ArrayList<Expense> expenseList = Expense.loadExpenses(this, username);
-
-
-    }
 }
