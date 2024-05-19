@@ -45,10 +45,8 @@ public class DashboardActivity extends AppCompatActivity {
         // retrieve stored information
         Intent myIntent = getIntent();
         String username = myIntent.getStringExtra("username");
-        Log.i("Debug", "received username: " + username);
         SharedPreferences sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
         String budget = sharedPreferences.getString(username + "_budget", "0.0");
-//        String expense = sharedPreferences.getString(username + "_expense", "0.0");
 
         // load expense list details
         double expenseSum = 0.0;
@@ -61,10 +59,10 @@ public class DashboardActivity extends AppCompatActivity {
         } else {
             expenseList = new ArrayList<>();
             expenseSum = 0.0;
+            JsonManager.saveExpenses(this, expenseList, username);
         }
-        String expense = String.valueOf(expenseSum);
         Log.i("Debug", "number of expense items: " + expenseList.size());
-        Log.i("LoadDashboardDebug", "budget: " + budget + " expense: " + expense);
+        Log.i("LoadDashboardDebug", "budget: " + budget + " expense: " + expenseSum);
 
         // set dashboard texts
         TextView welcomeText = findViewById(R.id.welcomeText);
@@ -74,9 +72,9 @@ public class DashboardActivity extends AppCompatActivity {
             budgetText.setText(budget);
         }
         TextView expenseText = findViewById(R.id.totalExpText);
-        expenseText.setText(expense);
+        expenseText.setText(String.valueOf(expenseSum));
         TextView balanceText = findViewById(R.id.balanceText);
-        double balance = Double.parseDouble(budget) - Double.parseDouble(expense);
+        double balance = Double.parseDouble(budget) - expenseSum;
         balanceText.setText(String.valueOf(balance));
     }
 
@@ -87,11 +85,9 @@ public class DashboardActivity extends AppCompatActivity {
         Intent myIntent = getIntent();
         String username = myIntent.getStringExtra("username");
 
-        // save budget and expense
+        // save budget input
         EditText budgetText = findViewById(R.id.budgetText);
-        editor.putString(username + "_budget", budgetText.getText().toString());
-//        TextView expenseText = findViewById(R.id.totalExpText);
-//        editor.putString(username + "_expense", expenseText.getText().toString());
+        editor.putString(username + "_budget", budgetText.getText().toString());=
         editor.apply();
 
         // go to add expense activity

@@ -52,7 +52,6 @@ public class AddExpenseActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         // update expense and balance
-//        String currExpense = sharedPreferences.getString(username + "_expense", "0.0");
         double expenseSum = 0.0;
         ArrayList<Expense> expenseList = JsonManager.loadExpenses(this, username);
         for (Expense item : expenseList) {
@@ -61,7 +60,6 @@ public class AddExpenseActivity extends AppCompatActivity {
         double totalExpense = myExpense.getExpenseAmt() + expenseSum;
         String setBudget = sharedPreferences.getString(username + "_budget", "0.0");
         double balance = Double.parseDouble(setBudget) - myExpense.getExpenseAmt();
-//        editor.putString(username + "_expense", String.valueOf(totalExpense));
         editor.putString(username + "_balance", String.valueOf(balance));
         editor.apply();
 
