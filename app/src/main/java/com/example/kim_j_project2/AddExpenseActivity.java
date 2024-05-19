@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,12 +35,22 @@ public class AddExpenseActivity extends AppCompatActivity {
         // get input
         EditText expenseText = findViewById(R.id.name);
         EditText amountText = findViewById(R.id.amount);
+
+        // check for valid input
+        if (expenseText.getText().toString().isEmpty() || amountText.getText().toString().isEmpty()) {
+            Toast.makeText(this, "Invalid Inputs", Toast.LENGTH_SHORT).show();
+            expenseText.setText("");
+            amountText.setText("");
+            return;
+        }
+
         Expense myExpense = new Expense(expenseText.getText().toString(), Double.parseDouble(amountText.getText().toString()));
 
         Intent myIntent = getIntent();
         String username = myIntent.getStringExtra("username");
         SharedPreferences sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
+
 
         // update expense and balance
         String currExpense = sharedPreferences.getString(username + "_expense", "0.0");
@@ -51,11 +62,6 @@ public class AddExpenseActivity extends AppCompatActivity {
         editor.apply();
 
         Log.d("DEBUG", "currExpense: " + currExpense + " newExpense: " + totalExpense + " setBudget: " + setBudget + " balance: " + balance);
-
-        // save expense to list
-        ArrayList<Expense> expenseList = Expense.loadExpenses(this, username);
-        expenseList.add(myExpense);
-        Expense.saveExpenses(this, expenseList, username);
 
         // go back to dashboard
         Intent nextIntent = new Intent(AddExpenseActivity.this, DashboardActivity.class);
