@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,7 +14,6 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -100,7 +98,7 @@ public class DashboardActivity extends AppCompatActivity {
         String budget = sharedPreferences.getString(username + "_budget", "0.0");
         String expense = sharedPreferences.getString(username + "_expense", "0.0");
 
-        Log.i("DEBUGGING", "budget: " + budget + "expense: " + expense);
+        Log.i("LoadDashboardDebug", "budget: " + budget + " expense: " + expense);
 
         // set dashboard texts
         TextView welcomeText = findViewById(R.id.welcomeText);
