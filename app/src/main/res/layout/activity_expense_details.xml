@@ -1,10 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ExpenseDetailsActivity">
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/main"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".ExpenseDetailsActivity">
 
+<Button
+    android:id="@+id/updateButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="196dp"
+    android:backgroundTint="#E9EEF2"
+    android:text="@string/update_expense"
+    android:textColor="#49454F"
+    android:textStyle="bold"
+    android:onClick="updateExpense"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.498"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+<LinearLayout
+    android:id="@+id/linearLayout2"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:layout_marginStart="25dp"
+    android:layout_marginTop="177dp"
+    android:layout_marginEnd="25dp"
+    android:layout_marginBottom="42dp"
+    android:orientation="vertical"
+    android:padding="20dp"
+    app:layout_constraintBottom_toTopOf="@+id/updateButton"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/expense_name"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        tools:ignore="HardcodedText" />
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:ems="10"
+        android:hint="@string/name"
+        android:inputType="text" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/amount"
+        android:textSize="32sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/amount"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:ems="10"
+        android:hint="@string/dollar_sign"
+        android:inputType="text" />
+</LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

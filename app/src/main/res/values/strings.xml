@@ -16,4 +16,5 @@
     <string name="expense_name">Expense Name</string>
     <string name="amount">Amount</string>
     <string name="input_budget">Input Budget</string>
+    <string name="update_expense">Update Expense</string>
 </resources>
