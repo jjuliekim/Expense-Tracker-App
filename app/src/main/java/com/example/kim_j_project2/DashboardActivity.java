@@ -75,7 +75,7 @@ public class DashboardActivity extends AppCompatActivity {
         expenseText.setText(String.valueOf(expenseSum));
         TextView balanceText = findViewById(R.id.balanceText);
         double balance = Double.parseDouble(budget) - expenseSum;
-        balanceText.setText(String.valueOf(balance));
+        balanceText.setText(String.valueOf(Math.round(balance * 100.0) / 100.0));
     }
 
     // send to add expense activity
