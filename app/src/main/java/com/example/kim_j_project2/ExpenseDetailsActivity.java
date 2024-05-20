@@ -1,7 +1,9 @@
 package com.example.kim_j_project2;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,9 +23,33 @@ public class ExpenseDetailsActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        setEditText();
     }
 
-    // update expense from user input
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setEditText();
+    }
+
+    // set edit text objects
+    private void setEditText() {
+        // get information
+//        Intent myIntent = getIntent();
+//        Expense expense = myIntent.getStringExtra();
+
+        EditText nameText = findViewById(R.id.name);
+        EditText amountText = findViewById(R.id.amount);
+
+//        String updatedName =
+
+        // if nothing inputted, keep the same information
+
+    }
+
+    // update and save expense from user input
     public void updateExpense(View view) {
+
     }
 }

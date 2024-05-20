@@ -7,23 +7,23 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"
 tools:context=".ExpenseDetailsActivity">
 
-<Button
-    android:id="@+id/updateButton"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="196dp"
-    android:backgroundTint="#E9EEF2"
-    android:text="@string/update_expense"
-    android:textColor="#49454F"
-    android:textStyle="bold"
-    android:onClick="updateExpense"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.498"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+    <Button
+        android:id="@+id/updateButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="196dp"
+        android:backgroundTint="#E9EEF2"
+        android:onClick="updateExpense"
+        android:text="@string/update_expense"
+        android:textColor="#49454F"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
-<LinearLayout
+    <LinearLayout
     android:id="@+id/linearLayout2"
     android:layout_width="0dp"
     android:layout_height="0dp"
