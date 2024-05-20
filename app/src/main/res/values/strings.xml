@@ -19,4 +19,5 @@
     <string name="update_expense">Update Expense</string>
     <string name="log_in">Log In</string>
     <string name="sign_up">Sign Up</string>
+    <string name="_0_00">0.00</string>
 </resources>

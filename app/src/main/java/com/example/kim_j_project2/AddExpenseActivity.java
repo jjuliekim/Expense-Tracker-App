@@ -44,6 +44,14 @@ public class AddExpenseActivity extends AppCompatActivity {
             return;
         }
 
+        try {
+            Double.parseDouble(amountText.getText().toString());
+        } catch (NumberFormatException e) {
+            Toast.makeText(this, "Invalid Budget", Toast.LENGTH_SHORT).show();
+            amountText.setText(R.string._0_00);
+            return;
+        }
+
         Expense myExpense = new Expense(expenseText.getText().toString(), Double.parseDouble(amountText.getText().toString()));
 
         Intent myIntent = getIntent();
