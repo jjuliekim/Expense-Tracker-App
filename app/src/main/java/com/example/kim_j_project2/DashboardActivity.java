@@ -90,18 +90,10 @@ public class DashboardActivity extends AppCompatActivity {
         EditText budgetText = findViewById(R.id.budgetText);
         String budget = budgetText.getText().toString();
         try {
-            Integer.parseInt(budget);
-            budget = budget + ".0";
-        } catch (NumberFormatException e) {
-            Toast.makeText(this, "Invalid Budget", Toast.LENGTH_SHORT).show();
-            budgetText.setText("");
-            return;
-        }
-        try {
             Double.parseDouble(budget);
         } catch (NumberFormatException e) {
             Toast.makeText(this, "Invalid Budget", Toast.LENGTH_SHORT).show();
-            budgetText.setText("");
+            budgetText.setText(sharedPreferences.getString(username + "_budget", ""));
             return;
         }
         editor.putString(username + "_budget", budget);

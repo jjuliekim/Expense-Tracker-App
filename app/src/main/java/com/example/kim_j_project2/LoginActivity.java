@@ -51,6 +51,7 @@ public class LoginActivity extends AppCompatActivity {
             String sharedPrefPw = sharedPreferences.getString(username + "_password", null);
             if (password.equals(sharedPrefPw)) { // successfully logged in
                 Toast.makeText(view.getContext(), "Logging In", Toast.LENGTH_LONG).show();
+                myIntent.putExtra("username", username);
                 startActivity(myIntent);
             } else { // incorrect login
                 Toast.makeText(view.getContext(), "Incorrect Password", Toast.LENGTH_SHORT).show();
