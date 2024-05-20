@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -87,7 +88,23 @@ public class DashboardActivity extends AppCompatActivity {
 
         // save budget input
         EditText budgetText = findViewById(R.id.budgetText);
-        editor.putString(username + "_budget", budgetText.getText().toString());
+        String budget = budgetText.getText().toString();
+        try {
+            Integer.parseInt(budget);
+            budget = budget + ".0";
+        } catch (NumberFormatException e) {
+            Toast.makeText(this, "Invalid Budget", Toast.LENGTH_SHORT).show();
+            budgetText.setText("");
+            return;
+        }
+        try {
+            Double.parseDouble(budget);
+        } catch (NumberFormatException e) {
+            Toast.makeText(this, "Invalid Budget", Toast.LENGTH_SHORT).show();
+            budgetText.setText("");
+            return;
+        }
+        editor.putString(username + "_budget", budget);
         editor.apply();
 
         // go to add expense activity
