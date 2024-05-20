@@ -42,6 +42,7 @@ public class LoginActivity extends AppCompatActivity {
             pwInput.setText("");
             return;
         }
+
         // check if username already exists
         SharedPreferences sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
         Intent myIntent = new Intent(LoginActivity.this, DashboardActivity.class);
@@ -52,12 +53,36 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(view.getContext(), "Logging In", Toast.LENGTH_LONG).show();
                 startActivity(myIntent);
             } else { // incorrect login
-                Toast.makeText(view.getContext(), "Invalid Login", Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), "Incorrect Password", Toast.LENGTH_SHORT).show();
                 userInput.setText("");
                 pwInput.setText("");
             }
         } else {
-            // register user
+            Toast.makeText(view.getContext(), "Invalid Login", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    // register user
+    public void checkRegister(View view) {
+        EditText userInput = findViewById(R.id.userInput);
+        String username = userInput.getText().toString();
+        EditText pwInput = findViewById(R.id.pwInput);
+        String password = pwInput.getText().toString();
+
+        // check if entries are empty
+        if (username.isEmpty() || password.isEmpty()) {
+            Toast.makeText(this, "Invalid Inputs", Toast.LENGTH_SHORT).show();
+            userInput.setText("");
+            pwInput.setText("");
+            return;
+        }
+
+        // check if username already exists
+        SharedPreferences sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
+        Intent myIntent = new Intent(LoginActivity.this, DashboardActivity.class);
+        if (sharedPreferences.contains(username)) {  // already registered
+            Toast.makeText(this, "User Already Exists", Toast.LENGTH_SHORT).show();
+        } else {  // save user info
             Toast.makeText(view.getContext(), "Registered", Toast.LENGTH_SHORT).show();
             SharedPreferences.Editor editor = sharedPreferences.edit();
             // save data using shared preferences

@@ -3,7 +3,7 @@
     <string name="sign_up_register">Sign Up/Register</string>
     <string name="username">Enter Username</string>
     <string name="password">Enter Password</string>
-    <string name="signup_reg">Sign Up / Register</string>
+    <string name="signup">Sign Up</string>
     <string name="welcome_user">Welcome User!</string>
     <string name="add_expense">Add Expense</string>
     <string name="expense_list">Expense List</string>
@@ -17,4 +17,6 @@
     <string name="amount">Amount</string>
     <string name="input_budget">Input Budget</string>
     <string name="update_expense">Update Expense</string>
+    <string name="log_in">Log In</string>
+    <string name="sign_up">Sign Up</string>
 </resources>
