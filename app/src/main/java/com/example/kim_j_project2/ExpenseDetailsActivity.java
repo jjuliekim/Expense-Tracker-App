@@ -1,9 +1,9 @@
 package com.example.kim_j_project2;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -41,6 +41,14 @@ public class ExpenseDetailsActivity extends AppCompatActivity {
 
         EditText nameText = findViewById(R.id.name);
         EditText amountText = findViewById(R.id.amount);
+
+        try {
+            Double.parseDouble(amountText.getText().toString());
+        } catch (NumberFormatException e) {
+            Toast.makeText(this, "Invalid Budget", Toast.LENGTH_SHORT).show();
+//            amountText.setText(String.valueOf(expense.getAmount()));
+            return;
+        }
 
 //        String updatedName =
 
