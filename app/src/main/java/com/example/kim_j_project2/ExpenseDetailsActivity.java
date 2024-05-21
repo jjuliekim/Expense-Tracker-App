@@ -1,5 +1,6 @@
 package com.example.kim_j_project2;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -10,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import java.util.ArrayList;
 
 public class ExpenseDetailsActivity extends AppCompatActivity {
 
@@ -35,9 +38,22 @@ public class ExpenseDetailsActivity extends AppCompatActivity {
 
     // set edit text objects
     private void setEditText() {
-        // get information
-//        Intent myIntent = getIntent();
-//        Expense expense = myIntent.getStringExtra();
+        // original expense information
+        Intent myIntent = getIntent();
+        String ogName = myIntent.getStringExtra("ogName");
+        double ogAmt = myIntent.getDoubleExtra("ogAmt", 0.00);
+
+        // set the original text
+        EditText nameText = findViewById(R.id.name);
+        EditText amountText = findViewById(R.id.amount);
+        nameText.setText(ogName);
+        amountText.setText(String.valueOf(ogAmt));
+    }
+
+    // update expense (button clicked)
+    public void updateExpense(View view) {
+        Intent myIntent = getIntent();
+        String username=  myIntent.getStringExtra("username");
 
         EditText nameText = findViewById(R.id.name);
         EditText amountText = findViewById(R.id.amount);
@@ -46,18 +62,24 @@ public class ExpenseDetailsActivity extends AppCompatActivity {
             Double.parseDouble(amountText.getText().toString());
         } catch (NumberFormatException e) {
             Toast.makeText(this, "Invalid Budget", Toast.LENGTH_SHORT).show();
-//            amountText.setText(String.valueOf(expense.getAmount()));
+            amountText.setText(String.valueOf(myIntent.getDoubleExtra("ogAmt", 0.00)));
             return;
         }
 
-//        String updatedName =
+        ArrayList<Expense> expenseList = JsonManager.loadExpenses(this, username);
+        Expense expense = null;
+        for (Expense item : expenseList) {
+            if (item.getExpenseName().equals(nameText.getText().toString())) {
+                expense = item;
+            }
+        }
+        expense.setExpenseName(nameText.getText().toString());
+        expense.setExpenseAmt(Double.parseDouble(amountText.getText().toString()));
+        JsonManager.saveExpenses(this, expenseList, username);
 
-        // if nothing inputted, keep the same information
-
-    }
-
-    // update and save expense from user input
-    public void updateExpense(View view) {
-
+        // go back to dashboard
+        Intent nextIntent = new Intent(ExpenseDetailsActivity.this, DashboardActivity.class);
+        nextIntent.putExtra("username", username);
+        startActivity(nextIntent);
     }
 }

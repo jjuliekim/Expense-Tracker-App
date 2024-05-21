@@ -1,13 +1,8 @@
 package com.example.kim_j_project2;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -44,6 +39,8 @@ public class ExpenseListActivity extends AppCompatActivity {
     private void loadList() {
         Intent myIntent = getIntent();
         String username = myIntent.getStringExtra("username");
+        Intent nextIntent = new Intent(ExpenseListActivity.this, ExpenseDetailsActivity.class);
+        nextIntent.putExtra("username", username);
 
         // load expense list and use custom adapter
         ArrayList<Expense> expenseList = JsonManager.loadExpenses(this, username);
@@ -53,8 +50,10 @@ public class ExpenseListActivity extends AppCompatActivity {
 
         // set on click listener
         listView.setOnItemClickListener((parent, view, position, id) -> {
-            Expense clickedExpense = (Expense) parent.getItemAtPosition(position);
-            Toast.makeText(ExpenseListActivity.this, "Clicked: " + clickedExpense.getExpenseName(), Toast.LENGTH_SHORT).show();
+            Expense expense = (Expense) parent.getItemAtPosition(position);
+            nextIntent.putExtra("ogName", expense.getExpenseName());
+            nextIntent.putExtra("ogAmt", expense.getExpenseAmt());
+            startActivity(nextIntent);
         });
     }
 }

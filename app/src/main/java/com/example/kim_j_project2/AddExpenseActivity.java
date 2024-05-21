@@ -48,7 +48,8 @@ public class AddExpenseActivity extends AppCompatActivity {
             Double.parseDouble(amountText.getText().toString());
         } catch (NumberFormatException e) {
             Toast.makeText(this, "Invalid Budget", Toast.LENGTH_SHORT).show();
-            amountText.setText(R.string._0_00);
+            amountText.setText("");
+            amountText.setHint("0.00");
             return;
         }
 
