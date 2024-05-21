@@ -52,12 +52,9 @@ public class ExpenseListActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
 
         // set on click listener
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Expense clickedExpense = (Expense) parent.getItemAtPosition(position);
-                Toast.makeText(ExpenseListActivity.this, "Clicked: " + clickedExpense.getExpenseName(), Toast.LENGTH_SHORT).show();
-            }
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            Expense clickedExpense = (Expense) parent.getItemAtPosition(position);
+            Toast.makeText(ExpenseListActivity.this, "Clicked: " + clickedExpense.getExpenseName(), Toast.LENGTH_SHORT).show();
         });
     }
 }

@@ -23,7 +23,7 @@ public class ExpenseAdapter extends ArrayAdapter<Expense> {
         TextView nameText = convertView.findViewById(R.id.exp_name);
         TextView amtText = convertView.findViewById(R.id.exp_amt);
         nameText.setText(expense.getExpenseName());
-        amtText.setText(String.valueOf(expense.getExpenseAmt()));
+        amtText.setText(String.format("$%.2f", expense.getExpenseAmt()));
 
         return convertView;
     }
