@@ -1,0 +1,2 @@
+- Download the APK file
+- Register a new account to test the app
