@@ -84,7 +84,7 @@
                 android:id="@+id/totalExpText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView"
+                android:text="@string/textview"
                 android:textAlignment="viewStart"
                 android:textSize="18sp" />
         </TableRow>
@@ -109,7 +109,7 @@
                 android:id="@+id/balanceText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView"
+                android:text="@string/textview"
                 android:textAlignment="viewStart"
                 android:textSize="18sp" />
         </TableRow>
@@ -118,14 +118,14 @@
 
     <Button
         android:id="@+id/addButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="143dp"
+        android:layout_height="55dp"
         android:layout_marginBottom="239dp"
         android:backgroundTint="#E9EEF2"
+        android:onClick="addExpense"
         android:text="@string/add_expense"
         android:textColor="#49454F"
         android:textStyle="bold"
-        android:onClick="addExpense"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -134,17 +134,20 @@
 
     <Button
         android:id="@+id/listButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="143dp"
+        android:layout_height="55dp"
         android:layout_marginStart="1dp"
         android:layout_marginBottom="101dp"
         android:backgroundTint="#E9EEF2"
+        android:onClick="showExpenseList"
         android:text="@string/expense_list"
         android:textColor="#49454F"
         android:textStyle="bold"
-        android:onClick="showExpenseList"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/addButton"
-        app:layout_constraintTop_toBottomOf="@+id/addButton" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addButton"
+        app:layout_constraintVertical_bias="0.402" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

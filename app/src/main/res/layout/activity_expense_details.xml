@@ -9,8 +9,8 @@ tools:context=".ExpenseDetailsActivity">
 
     <Button
         android:id="@+id/updateButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="165dp"
+        android:layout_height="62dp"
         android:layout_marginBottom="196dp"
         android:backgroundTint="#E9EEF2"
         android:onClick="updateExpense"
@@ -19,7 +19,6 @@ tools:context=".ExpenseDetailsActivity">
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 

@@ -65,34 +65,38 @@
 
     <Button
         android:id="@+id/signupButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="122dp"
+        android:layout_height="61dp"
         android:layout_marginBottom="209dp"
         android:backgroundTint="#E8EDF1"
         android:onClick="checkRegister"
         android:text="@string/sign_up"
         android:textColor="#49454F"
         android:textStyle="bold"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <Button
         android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="122dp"
+        android:layout_height="61dp"
         android:layout_marginTop="23dp"
         android:layout_marginBottom="143dp"
-        android:text="@string/log_in"
         android:backgroundTint="#E8EDF1"
+        android:onClick="checkLogin"
+        android:text="@string/log_in"
         android:textColor="#49454F"
         android:textStyle="bold"
-        android:onClick="checkLogin"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signupButton" />
+        app:layout_constraintTop_toBottomOf="@+id/signupButton"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,14 +9,15 @@
 
     <Button
         android:id="@+id/button4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="121dp"
+        android:layout_height="66dp"
         android:layout_marginBottom="196dp"
         android:backgroundTint="#E9EEF2"
+        android:onClick="saveExpense"
         android:text="@string/save_expense"
         android:textColor="#49454F"
         android:textStyle="bold"
-        android:onClick="saveExpense"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
