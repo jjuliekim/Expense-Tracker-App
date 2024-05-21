@@ -16,7 +16,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class DashboardActivity extends AppCompatActivity {
@@ -113,6 +112,13 @@ public class DashboardActivity extends AppCompatActivity {
         Intent myIntent = getIntent();
         String username = myIntent.getStringExtra("username");
         EditText budgetText = findViewById(R.id.budgetText);
+        try {
+            Double.parseDouble(budgetText.getText().toString());
+        } catch (NumberFormatException e) {
+            Toast.makeText(this, "Invalid Budget", Toast.LENGTH_SHORT).show();
+            budgetText.setText(sharedPreferences.getString(username + "_budget", ""));
+            return;
+        }
         editor.putString(username + "_budget", budgetText.getText().toString());
         editor.apply();
         // go to expense list activity
